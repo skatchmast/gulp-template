@@ -1,3 +1,7 @@
+# dir
 .idea/
 node_modules/
 bild/
+
+# file
+package-lock.json
