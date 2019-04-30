@@ -112,8 +112,8 @@ gulp.task('watch', ( ) => {
 
 
 /**
- * Assignment of main
- * @build watch
+ * Browser-sync of refresh
+ * @open server
  ************************************************************/
 gulp.task('web', ( ) => { web.init( conf.refresh ) });
 
