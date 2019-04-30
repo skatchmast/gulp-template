@@ -15,6 +15,9 @@ presets:
     presets:
         - presets: ["@babel/preset-env"]
 
+rename:
+    suffix: .min
+
 
 library:
     css: 
@@ -50,8 +53,7 @@ opion:
             - last 8 versions
         cascade: true
     # Options for files rename
-    rename:
-        suffix: .min
+
         # extname: .css
     # Options for files gulp cssnano
     compressed:        

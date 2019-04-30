@@ -11,24 +11,25 @@ const
     webserver	    = require( 'browser-sync' ),
 
 //  More plugins ALL
-//     rename 			= require( 'gulp-rename' ),
+    rename 			= require( 'gulp-rename' ),
 //     rimraf 			= require( 'rimraf' ),
 //     run 			= require( 'run-sequence' ),
     plumber 	  	= require( 'gulp-plumber' ),
+    concat 	  	    = require( 'gulp-concat' ),
+
 
 //  More plugins CSS
 
-//     autoprefixer    = require( 'gulp-autoprefixer' ),
+//     autoprefixer     = require( 'gulp-autoprefixer' ),
 //     cssbeautify   	= require( 'gulp-cssbeautify' ),
-//     cssnano 		= require( 'gulp-cssnano' ),
+//     cssnano 		    = require( 'gulp-cssnano' ),
 //     removeComments 	= require( 'gulp-strip-css-comments' ),
 //     gcmq          	= require( 'gulp-group-css-media-queries' ),
 
 //  More plugins JS
     prettify 		= require( 'gulp-jsbeautifier' ),
     babel 			= require( 'gulp-babel' ),
-//     browserify 		= require( 'gulp-browserify' ),
-//     uglify 			= require( 'gulp-uglify' ),
+    uglify 			= require( 'gulp-uglify' ),
 
 //  Preprocessors for compile
     sass  			= require( 'gulp-sass' ),
@@ -50,6 +51,7 @@ gulp.task( 'js:dev' ,( ) => {
 
         .pipe( plumber() )
         .pipe( coffee( { bare: true } ) )
+        // .pipe( concat('app.js') )
         .pipe( babel( conf.presets ) )
         .pipe( prettify() )
         .pipe( gulp.dest( conf.build.script ) )
@@ -64,9 +66,10 @@ gulp.task( 'js:prod' ,( ) => {
 
         .pipe( plumber() )
         .pipe( coffee( { bare: true } ) )
+        // .pipe( concat('app.js') )
         .pipe( babel( conf.presets ) )
         .pipe( uglify() )
-        .pipe( rename( conf.opion.rename ) )
+        .pipe( rename( conf.rename ) )
         .pipe( gulp.dest( conf.build.script ) )
 
 //  End js prod task
