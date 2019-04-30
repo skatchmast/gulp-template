@@ -1,0 +1,24 @@
+{
+  "name": "tatoo",
+  "description": "tatoo templates",
+  "main": "index.js",
+  "authors": [
+    "skethMast"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.1.3",
+    "jquery.easing": "*",
+    "security-holder": "jquery.visible#*"
+  }
+}
