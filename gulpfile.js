@@ -12,15 +12,14 @@ const
 
 //  More plugins ALL
     rename 			= require( 'gulp-rename' ),
-//     rimraf 			= require( 'rimraf' ),
     plumber 	  	= require( 'gulp-plumber' ),
     concat 	  	    = require( 'gulp-concat' ),
 
 
 //  More plugins CSS
 
-//     autoprefixer     = require( 'gulp-autoprefixer' ),
-//     cssbeautify   	= require( 'gulp-cssbeautify' ),
+    autoprefixer     = require( 'gulp-autoprefixer' ),
+    cssbeautify   	= require( 'gulp-cssbeautify' ),
 //     cssnano 		    = require( 'gulp-cssnano' ),
 //     removeComments 	= require( 'gulp-strip-css-comments' ),
 //     gcmq          	= require( 'gulp-group-css-media-queries' ),
@@ -88,6 +87,8 @@ gulp.task( 'style:dev' ,( ) => {
 
         .pipe( plumber() )
         .pipe( sass() )
+        .pipe( autoprefixer( conf.pref ) )
+        .pipe( cssbeautify() )
         .pipe( gulp.dest( conf.build.style ) )
         .pipe( web.stream() )
 

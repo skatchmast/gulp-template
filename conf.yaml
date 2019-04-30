@@ -12,12 +12,21 @@ build:
 
 # Opions for plugins
 # ============================================
+
+# babel
 presets:
     presets:
         - presets: ["@babel/preset-env"]
 
+# rename file
 rename:
     suffix: .min
+
+# autoprefixer
+pref:
+    browsers:
+        - last 8 versions
+    cascade: true
 
 
 
