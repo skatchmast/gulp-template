@@ -8,7 +8,7 @@ const
 //  Global plugins
     gulp        	= require( 'gulp' ),
     fs 				= require( 'fs' ),
-    web	    = require( 'browser-sync' ),
+    web	            = require( 'browser-sync' ),
 
 //  More plugins ALL
     rename 			= require( 'gulp-rename' ),
