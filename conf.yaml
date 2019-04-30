@@ -1,0 +1,74 @@
+# Paths to
+# ============================================
+script: ./source/script/*.*
+style: ./source/style/*.*
+
+build:
+    script: ./build/js
+    style:  ./build/css
+
+
+
+# Opions for plugins
+# ============================================
+presets:
+    presets:
+        - presets: ["@babel/preset-env"]
+
+
+library:
+    css: 
+        includePaths: ./libs
+    js:  
+        paths: 
+#            - ./libs
+            - ./coffee
+
+
+# Task list
+# ============================================
+taskList: 
+    - clean:css
+    - clean:js
+    - web
+    - watch
+
+taskListWatch:
+    - css:build
+    - css:libs
+    - js:build
+    - js:libs
+
+
+
+# Opions for plugins
+# ============================================
+opion:
+    # Options for autoprefixer
+    pref:
+        browsers: 
+            - last 8 versions
+        cascade: true
+    # Options for files rename
+    rename:
+        suffix: .min
+        # extname: .css
+    # Options for files gulp cssnano
+    compressed:        
+        index: false
+        discardComments: { removeAll: true }
+    # Options for files babel
+
+
+
+
+
+# Options for server browser sync
+# ============================================
+webserver:
+    server: ./
+    notify: false
+    open: true
+    ui: false      
+
+
