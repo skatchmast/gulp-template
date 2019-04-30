@@ -42,9 +42,9 @@ const
 
 /**
  * Assignment of main
- * @task
+ * @preprocessors tasks scripts
  ************************************************************/
-gulp.task( 'js:dev' ,( ) => {
+gulp.task( 'script:dev' ,( ) => {
 
     return gulp.src( conf.script )
 
@@ -59,7 +59,7 @@ gulp.task( 'js:dev' ,( ) => {
 } );
 
 
-gulp.task( 'js:prod' ,( ) => {
+gulp.task( 'script:prod' ,( ) => {
 
     return gulp.src( conf.script )
 
@@ -79,10 +79,28 @@ gulp.task( 'js:prod' ,( ) => {
 
 /**
  * Assignment of main
+ * @preprocessors tasks styles
+ ************************************************************/
+gulp.task( 'style:dev' ,( ) => {
+
+    return gulp.src( conf.style )
+
+        .pipe( plumber() )
+        .pipe( sass() )
+        .pipe( gulp.dest( conf.build.style ) )
+
+//  End js dev task
+} );
+
+
+
+
+/**
+ * Assignment of main
  * @preprocessors watch
  ************************************************************/
 gulp.task('watch', ( ) => {
-    gulp.watch( './source/**/*.*', gulp.series('js:dev') );
+    gulp.watch( './source/**/*.*', gulp.series('script:dev') );
 });
 
 
@@ -107,7 +125,7 @@ gulp.task('web', ( ) => {
 
 
 /**
- * Assignment web server
- * @default
+ * Assignment of main
+ * @default task
  ************************************************************/
 gulp.task('default', gulp.parallel( conf.tasksList ) );
