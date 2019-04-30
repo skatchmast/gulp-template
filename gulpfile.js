@@ -54,6 +54,7 @@ gulp.task( 'script:dev' ,( ) => {
         .pipe( babel( conf.presets ) )
         .pipe( prettify() )
         .pipe( gulp.dest( conf.build.script ) )
+        .pipe( web.stream() )
 
 //  End js dev task
 } );
@@ -88,6 +89,7 @@ gulp.task( 'style:dev' ,( ) => {
         .pipe( plumber() )
         .pipe( sass() )
         .pipe( gulp.dest( conf.build.style ) )
+        .pipe( web.stream() )
 
 //  End js dev task
 } );
@@ -100,7 +102,10 @@ gulp.task( 'style:dev' ,( ) => {
  * @preprocessors watch
  ************************************************************/
 gulp.task('watch', ( ) => {
-    gulp.watch( './source/**/*.*', gulp.series('script:dev') );
+    gulp.watch( conf.script, gulp.series('script:dev') );
+    gulp.watch( conf.style, gulp.series('style:dev') );
+    /* HTML file reload */
+    gulp.watch( './*.html' ).on('change', web.reload );
 });
 
 
@@ -110,16 +115,7 @@ gulp.task('watch', ( ) => {
  * Assignment of main
  * @build watch
  ************************************************************/
-gulp.task('web', ( ) => {
-
-    web.init( conf.refresh );
-
-    /* reloads */
-    gulp.watch( conf.build.script + '/*.js' ).on('change', web.reload);
-    gulp.watch("./*.html").on('change', web.reload)
-    /* streams */
-    gulp.watch( conf.build.style + '/*.css' ).on('change', web.stream);
-});
+gulp.task('web', ( ) => { web.init( conf.refresh ) });
 
 
 
