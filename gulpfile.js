@@ -79,7 +79,7 @@ gulp.task( 'js:prod' ,( ) => {
 
 /**
  * Assignment of main
- * @watch
+ * @preprocessors watch
  ************************************************************/
 gulp.task('watch', ( ) => {
     gulp.watch( './source/**/*.*', gulp.series('js:dev') );
@@ -89,18 +89,25 @@ gulp.task('watch', ( ) => {
 
 
 /**
- * Assignment web server
- * @watch
+ * Assignment of main
+ * @build watch
  ************************************************************/
 gulp.task('web', ( ) => {
 
     web.init( conf.refresh );
 
+    /* reloads */
     gulp.watch( conf.build.script + '/*.js' ).on('change', web.reload);
     gulp.watch("./*.html").on('change', web.reload)
-
+    /* streams */
     gulp.watch( conf.build.style + '/*.css' ).on('change', web.stream);
 });
 
-//  task default
+
+
+
+/**
+ * Assignment web server
+ * @default
+ ************************************************************/
 gulp.task('default', gulp.parallel( conf.tasksList ) );
