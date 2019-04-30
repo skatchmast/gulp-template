@@ -31,10 +31,8 @@ library:
 # Task list
 # ============================================
 taskList: 
-    - clean:css
-    - clean:js
-    - web
     - watch
+    - serve
 
 taskListWatch:
     - css:build

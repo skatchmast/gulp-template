@@ -13,7 +13,7 @@ const
 //  More plugins ALL
     rename 			= require( 'gulp-rename' ),
 //     rimraf 			= require( 'rimraf' ),
-//     run 			= require( 'run-sequence' ),
+    run 			= require( 'run-sequence' ),
     plumber 	  	= require( 'gulp-plumber' ),
     concat 	  	    = require( 'gulp-concat' ),
 
@@ -42,8 +42,8 @@ const
 
 
 /**
- * Assignment of main task
- * @build
+ * Assignment of main
+ * @task
  ************************************************************/
 gulp.task( 'js:dev' ,( ) => {
 
@@ -74,3 +74,20 @@ gulp.task( 'js:prod' ,( ) => {
 
 //  End js prod task
 } );
+
+gulp.task('watch', ( ) => {
+    gulp.watch( './source/**/*.*', gulp.series('js:dev') );
+});
+
+gulp.task('serve', ( ) => {
+
+    webserver.init({
+        server: "./"
+    });
+
+    gulp.watch('./build/**/*.*').on('change', webserver.reload);
+    gulp.watch("./*.html").on('change', webserver.reload)
+});
+
+//  task default
+gulp.task('default', gulp.parallel('watch', 'serve') );
