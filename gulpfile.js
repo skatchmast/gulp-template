@@ -8,12 +8,11 @@ const
 //  Global plugins
     gulp        	= require( 'gulp' ),
     fs 				= require( 'fs' ),
-    webserver	    = require( 'browser-sync' ),
+    web	    = require( 'browser-sync' ),
 
 //  More plugins ALL
     rename 			= require( 'gulp-rename' ),
 //     rimraf 			= require( 'rimraf' ),
-    run 			= require( 'run-sequence' ),
     plumber 	  	= require( 'gulp-plumber' ),
     concat 	  	    = require( 'gulp-concat' ),
 
@@ -75,19 +74,33 @@ gulp.task( 'js:prod' ,( ) => {
 //  End js prod task
 } );
 
+
+
+
+/**
+ * Assignment of main
+ * @watch
+ ************************************************************/
 gulp.task('watch', ( ) => {
     gulp.watch( './source/**/*.*', gulp.series('js:dev') );
 });
 
-gulp.task('serve', ( ) => {
 
-    webserver.init({
-        server: "./"
-    });
 
-    gulp.watch('./build/**/*.*').on('change', webserver.reload);
-    gulp.watch("./*.html").on('change', webserver.reload)
+
+/**
+ * Assignment web server
+ * @watch
+ ************************************************************/
+gulp.task('web', ( ) => {
+
+    web.init( conf.refresh );
+
+    gulp.watch( conf.build.script + '/*.js' ).on('change', web.reload);
+    gulp.watch("./*.html").on('change', web.reload)
+
+    gulp.watch( conf.build.style + '/*.css' ).on('change', web.stream);
 });
 
 //  task default
-gulp.task('default', gulp.parallel('watch', 'serve') );
+gulp.task('default', gulp.parallel( conf.tasksList ) );

@@ -9,6 +9,7 @@ build:
 
 
 
+
 # Opions for plugins
 # ============================================
 presets:
@@ -19,20 +20,13 @@ rename:
     suffix: .min
 
 
-library:
-    css: 
-        includePaths: ./libs
-    js:  
-        paths: 
-#            - ./libs
-            - ./coffee
 
 
 # Task list
 # ============================================
-taskList: 
+tasksList:
     - watch
-    - serve
+    - web
 
 taskListWatch:
     - css:build
@@ -59,13 +53,19 @@ opion:
         discardComments: { removeAll: true }
     # Options for files babel
 
+library:
+    css:
+        includePaths: ./libs
+    js:
+        paths:
+            - ./libs
+            - ./coffee
 
 
 
-
-# Options for server browser sync
+# Options for server browser-sync
 # ============================================
-webserver:
+refresh:
     server: ./
     notify: false
     open: true
