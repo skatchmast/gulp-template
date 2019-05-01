@@ -13,16 +13,17 @@ const
 //  More plugins ALL
     rename 			= require( 'gulp-rename' ),
     plumber 	  	= require( 'gulp-plumber' ),
+    clean 	  	    = require( 'gulp-clean' ),
     concat 	  	    = require( 'gulp-concat' ),
 
 
 //  More plugins CSS
 
-    autoprefixer     = require( 'gulp-autoprefixer' ),
-    cssbeautify   	= require( 'gulp-cssbeautify' ),
-//     cssnano 		    = require( 'gulp-cssnano' ),
-//     removeComments 	= require( 'gulp-strip-css-comments' ),
-//     gcmq          	= require( 'gulp-group-css-media-queries' ),
+    autoprefixer    = require( 'gulp-autoprefixer' ),
+    cssbeautify     = require( 'gulp-cssbeautify' ),
+    cssnano         = require( 'gulp-cssnano' ),
+    removeComments 	= require( 'gulp-strip-css-comments' ),
+    gcmq          	= require( 'gulp-group-css-media-queries' ),
 
 //  More plugins JS
     prettify 		= require( 'gulp-jsbeautifier' ),
@@ -92,7 +93,24 @@ gulp.task( 'style:dev' ,( ) => {
         .pipe( gulp.dest( conf.build.style ) )
         .pipe( web.stream() )
 
-//  End js dev task
+//  End css dev task
+} );
+
+
+gulp.task( 'style:prod' ,( ) => {
+
+    return gulp.src( conf.style )
+
+        .pipe( plumber() )
+        .pipe( sass() )
+        .pipe( autoprefixer( conf.pref ) )
+        .pipe( cssnano( conf.opion.compressed ) )
+        .pipe( removeComments() )
+        .pipe( rename( conf.rename ) )
+        .pipe( gulp.dest( conf.build.style ) )
+        .pipe( web.stream() )
+
+//  End css prod task
 } );
 
 
@@ -117,6 +135,18 @@ gulp.task('watch', ( ) => {
  * @open server
  ************************************************************/
 gulp.task('web', ( ) => { web.init( conf.refresh ) });
+
+
+
+
+/**
+ * folder build
+ * @clean
+ ************************************************************/
+gulp.task( 'clean' ,( ) => {
+
+    return gulp.src( './build' ).pipe( clean() )
+} );
 
 
 

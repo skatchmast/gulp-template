@@ -34,14 +34,18 @@ pref:
 # Task list
 # ============================================
 tasksList:
+    - clean
+    - script:dev
+    - style:dev
     - watch
     - web
 
-taskListWatch:
-    - css:build
-    - css:libs
-    - js:build
-    - js:libs
+taskListProd:
+    - clean
+    - script:dev
+    - style:dev
+    - watch
+    - web
 
 
 

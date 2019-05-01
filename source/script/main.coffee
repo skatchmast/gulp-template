@@ -1,3 +1,3 @@
-class Build
-	k: ->
-		'Build'
+class Kernel
+	prop: ->
+		'Kernel'
