@@ -28,6 +28,11 @@ pref:
         - last 8 versions
     cascade: true
 
+# cssnano
+compressed:
+    index: false
+    discardComments: { removeAll: true }
+
 
 
 
@@ -46,33 +51,6 @@ taskListProd:
     - style:dev
     - watch
     - web
-
-
-
-# Opions for plugins
-# ============================================
-opion:
-    # Options for autoprefixer
-    pref:
-        browsers: 
-            - last 8 versions
-        cascade: true
-    # Options for files rename
-
-        # extname: .css
-    # Options for files gulp cssnano
-    compressed:        
-        index: false
-        discardComments: { removeAll: true }
-    # Options for files babel
-
-library:
-    css:
-        includePaths: ./libs
-    js:
-        paths:
-            - ./libs
-            - ./coffee
 
 
 

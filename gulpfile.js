@@ -104,7 +104,7 @@ gulp.task( 'style:prod' ,( ) => {
         .pipe( plumber() )
         .pipe( sass() )
         .pipe( autoprefixer( conf.pref ) )
-        .pipe( cssnano( conf.opion.compressed ) )
+        .pipe( cssnano( conf.compressed ) )
         .pipe( removeComments() )
         .pipe( rename( conf.rename ) )
         .pipe( gulp.dest( conf.build.style ) )
