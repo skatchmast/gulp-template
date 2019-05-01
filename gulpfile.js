@@ -41,11 +41,24 @@ const
 
 
 /**
+ * your experiment
+ * @test
+ ************************************************************/
+gulp.task( 'test' ,( ) => {
+    return console.log(fs.existsSync('./build'))
+} );
+
+
+
+
+/**
  * folder build
  * @clean
  ************************************************************/
 gulp.task( 'clean' ,( ) => {
-    return gulp.src( './build' ).pipe( clean() )
+
+    if (fs.existsSync('./build')) return gulp.src( './build' ).pipe( clean() )
+
 } );
 
 
