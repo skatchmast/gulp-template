@@ -1,42 +1,13 @@
-_classCallCheck = (instance, Constructor) ->
-	if !(instance instanceof Constructor)
-		throw new TypeError('Cannot call a class as a function')
-	return
-
-'use strict'
-_createClass = do ->
-	
-	defineProperties = (target, props) ->
-		i = 0
-		while i < props.length
-			descriptor = props[i]
-			descriptor.enumerable = descriptor.enumerable or false
-			descriptor.configurable = true
-			if 'value' of descriptor
-				descriptor.writable = true
-			Object.defineProperty target, descriptor.key, descriptor
-			i++
-		return
-	
-	(Constructor, protoProps, staticProps) ->
-		if protoProps
-			defineProperties Constructor.prototype, protoProps
-		if staticProps
-			defineProperties Constructor, staticProps
-		Constructor
-_typeof = if typeof Symbol == 'function' and typeof Symbol.iterator == 'symbol' then ((obj) ->
-	typeof obj
-) else ((obj) ->
-	if obj and typeof Symbol == 'function' and obj.constructor == Symbol and obj != Symbol.prototype then 'symbol' else typeof obj
-)
 ((root, factory) ->
 	if typeof define == 'function' and define.amd
 #AMD
 		define [ 'jquery' ], factory
-	else if (if typeof exports == 'undefined' then 'undefined' else _typeof(exports)) == 'object'
+	else if typeof exports == 'object'
+#CommonJS
 		$ = requie('jquery')
 		module.exports = factory($)
 	else
+#都不是，浏览器全局定义
 		root.navScrollSpy = factory(root.jQuery)
 	return
 ) window, ($) ->
@@ -49,132 +20,120 @@ _typeof = if typeof Symbol == 'function' and typeof Symbol.iterator == 'symbol' 
 		speed: 550
 	jqNavScrollSpy = do ->
 		`var jqNavScrollSpy`
+		#初始化
 		
 		jqNavScrollSpy = (element, configs) ->
-			_classCallCheck this, jqNavScrollSpy
 			@_element = element
 			@$win = $(window)
 			@defaults = $.extend({}, defaults, configs)
 			@init()
 			return
 		
-		_createClass jqNavScrollSpy, [
-			{
-				key: 'init'
-				value: ->
-					@$navItems = $(@defaults.navItems)
-					@$spyItems = $(@defaults.spyItems)
-					@$scrollContainer = $(@defaults.scrollContainer)
-					@fixTop = $(@$spyItems[0]).offset().top
-					#drop
-					@spyItemsData = @getSpyItemsData()
-					@spyScroll()
-					@clickSwitch()
+		jqNavScrollSpy::init = ->
+			@$navItems = $(@defaults.navItems)
+			@$spyItems = $(@defaults.spyItems)
+			@$scrollContainer = $(@defaults.scrollContainer)
+			@fixTop = $(@$spyItems[0]).offset().top
+			#修正初始化的时候元素距离顶部的距离不等于滚动的距离的变量，也就是减去第一个元素距离顶部的高度
+			@spyItemsData = @getSpyItemsData()
+			@spyScroll()
+			@clickSwitch()
+			return
+		
+		#监听滚动事件
+		
+		jqNavScrollSpy::spyScroll = ->
+			@$win.on 'scroll', @throttle(@scrollCallBack, 100, 200)
+			return
+		
+		#滚动监听的回调函数
+		
+		jqNavScrollSpy::scrollCallBack = ->
+			spyIndex = @getVisibleElIndex()
+			@changeNav @$navItems[spyIndex]
+			return
+		
+		#存储监视滚动元素的中心位置数组
+		
+		jqNavScrollSpy::getSpyItemsData = ->
+			_this_1 = this
+			spyItemsData = []
+			@$spyItems.each (index) ->
+				spyItemsData[index] = (_this_1.getOffsetTop(index) + _this_1.getOffsetTop(index) + $(_this_1.$spyItems[index]).height()) / 2
+				return
+			spyItemsData
+		
+		#获得当前滚动到视图区的元素的索引
+		
+		jqNavScrollSpy::getVisibleElIndex = ->
+			_this_1 = this
+			spyIndex = undefined
+			scrollTop = parseInt(@$win.scrollTop())
+			$.each @spyItemsData, (index) ->
+				if _this_1.spyItemsData[0] >= scrollTop
+					spyIndex = 0
+					return true
+				else if _this_1.spyItemsData[index] <= scrollTop and scrollTop <= _this_1.spyItemsData[index + 1]
+					spyIndex = index + 1
+					return true
+				return
+			spyIndex
+		
+		#节流函数
+		
+		jqNavScrollSpy::throttle = (func, wait, mustRun) ->
+			timeout = undefined
+			context = this
+			startTime = new Date
+			->
+				args = arguments
+				curTime = new Date
+				clearTimeout timeout
+				# 如果达到了规定的触发时间间隔，触发 handler
+				if curTime - startTime >= mustRun
+					func.apply context, args
+					startTime = curTime
+# 没达到触发间隔，重新设定定时器
+				else
+					timeout = setTimeout(func.bind(context), wait)
+				return
+		
+		#点击切换
+		
+		jqNavScrollSpy::clickSwitch = ->
+			_this = this
+			@$navItems.on 'click', ->
+				_this.changeNav this
+				navIndex = $(this).index()
+				_this.$win.off 'scroll'
+				_this.scrollIntoView navIndex
+				return
+			return
+		
+		#改变导航active
+		
+		jqNavScrollSpy::changeNav = (currentNav) ->
+			@$navItems.removeClass 'active'
+			$(currentNav).addClass 'active'
+			return
+		
+		#滚动到可视区
+		
+		jqNavScrollSpy::scrollIntoView = (navIndex) ->
+			_this_1 = this
+			offsetTop = parseInt(@getOffsetTop(navIndex))
+#			if !@$scrollContainer.is(':animated')
+			@$scrollContainer.stop().animate { 'scrollTop': offsetTop }, @defaults.speed, @defaults.easing, ->
+#动画结束后重新注册滚动监听事件
+					_this_1.spyScroll()
 					return
-				
-			}
-			{
-				key: 'spyScroll'
-				value: ->
-					@$win.on 'scroll', @throttle(@scrollCallBack, 100, 200)
-					return
-				
-			}
-			{
-				key: 'scrollCallBack'
-				value: ->
-					spyIndex = @getVisibleElIndex()
-					@changeNav @$navItems[spyIndex]
-					return
-				
-			}
-			{
-				key: 'getSpyItemsData'
-				value: ->
-					_this2 = this
-					spyItemsData = []
-					@$spyItems.each (index) ->
-						spyItemsData[index] = (_this2.getOffsetTop(index) + _this2.getOffsetTop(index) + $(_this2.$spyItems[index]).height()) / 2
-						return
-					spyItemsData
-				
-			}
-			{
-				key: 'getVisibleElIndex'
-				value: ->
-					_this3 = this
-					spyIndex = undefined
-					scrollTop = parseInt(@$win.scrollTop())
-					$.each @spyItemsData, (index) ->
-						if _this3.spyItemsData[0] >= scrollTop
-							spyIndex = 0
-							return true
-						else if _this3.spyItemsData[index] <= scrollTop and scrollTop <= _this3.spyItemsData[index + 1]
-							spyIndex = index + 1
-							return true
-						return
-					spyIndex
-				
-			}
-			{
-				key: 'throttle'
-				value: (func, wait, mustRun) ->
-					timeout = undefined
-					context = this
-					startTime = new Date
-					->
-						args = arguments
-						curTime = new Date
-						clearTimeout timeout
-						# 如果达到了规定的触发时间间隔，触发 handler
-						if curTime - startTime >= mustRun
-							func.apply context, args
-							startTime = curTime
-						else
-							timeout = setTimeout(func.bind(context), wait)
-						return
-				
-			}
-			{
-				key: 'clickSwitch'
-				value: ->
-					_this = this
-					@$navItems.on 'click', ->
-						_this.changeNav this
-						navIndex = $(this).index()
-						_this.$win.off 'scroll'
-						_this.scrollIntoView navIndex
-						return
-					return
-				
-			}
-			{
-				key: 'changeNav'
-				value: (currentNav) ->
-					@$navItems.removeClass 'active'
-					$(currentNav).addClass 'active'
-					return
-				
-			}
-			{
-				key: 'scrollIntoView'
-				value: (navIndex) ->
-					_this4 = this
-					offsetTop = parseInt(@getOffsetTop(navIndex))
-#					if !@$scrollContainer.is(':animated')
-					@$scrollContainer.stop().animate { 'scrollTop': offsetTop }, @defaults.speed, @defaults.easing, ->
-						_this4.spyScroll()
-						return
-					return
-				
-			}
-			{
-				key: 'getOffsetTop'
-				value: (index) ->
-					parseInt($(@$spyItems[index]).offset().top) - parseInt(@fixTop)
-				
-			}
-		]
+			return
+		
+		#获取滚动元素距离顶部的距离
+		
+		jqNavScrollSpy::getOffsetTop = (index) ->
+			parseInt($(@$spyItems[index]).offset().top) - parseInt(@fixTop)
+		
 		jqNavScrollSpy
 	
 	$.fn.jqNavScrollSpy = (configs) ->
