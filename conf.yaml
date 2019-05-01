@@ -39,7 +39,7 @@ compressed:
 # Task list
 # ============================================
 tasksList:
-    - clean
+#    - clean
     - script:dev
     - style:dev
     - watch

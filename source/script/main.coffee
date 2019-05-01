@@ -1,3 +1,3 @@
 class Kernel
 	prop: ->
-		'Kernel'
+		'Kernelasdsd'

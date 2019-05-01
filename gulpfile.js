@@ -41,6 +41,17 @@ const
 
 
 /**
+ * folder build
+ * @clean
+ ************************************************************/
+gulp.task( 'clean' ,( ) => {
+    return gulp.src( './build' ).pipe( clean() )
+} );
+
+
+
+
+/**
  * Assignment of main
  * @preprocessors tasks scripts
  ************************************************************/
@@ -135,18 +146,6 @@ gulp.task('watch', ( ) => {
  * @open server
  ************************************************************/
 gulp.task('web', ( ) => { web.init( conf.refresh ) });
-
-
-
-
-/**
- * folder build
- * @clean
- ************************************************************/
-gulp.task( 'clean' ,( ) => {
-
-    return gulp.src( './build' ).pipe( clean() )
-} );
 
 
 
