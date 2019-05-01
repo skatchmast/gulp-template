@@ -136,7 +136,7 @@
 		
 		jqNavScrollSpy
 	
-	$.fn.jqNavScrollSpy = (configs) ->
+	$.fn.navActiveAnimate = (configs) ->
 		@each ->
 			if !$.data(this, 'plugin_' + pluginName)
 				$.data this, 'plugin_' + pluginName, new jqNavScrollSpy(this, configs)
