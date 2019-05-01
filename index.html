@@ -57,13 +57,13 @@
             <div class="menu right-float clearfix">
                 <nav id="main-nav">
                     <ul>
-                        <li class="current-menu-item"><a href="#home" class="scroll-to">Home</a></li>
-                        <li><a href="#about" class="scroll-to">About</a></li>
-                        <li><a href="#service" class="scroll-to">Service</a></li>
-                        <li><a href="#portfolio" class="scroll-to">Portfolio</a></li>
-                        <li><a href="#team" class="scroll-to">Team</a></li>
-                        <li><a href="#blog" class="scroll-to">Blog</a></li>
-                        <li><a href="elements.html">Elements</a>
+                        <li class="nav-item"><a href="#home" class="scroll-to">Home</a></li>
+                        <li class="nav-item"><a href="#about" class="scroll-to">About</a></li>
+                        <li class="nav-item"><a href="#service" class="scroll-to">Service</a></li>
+                        <li class="nav-item"><a href="#portfolio" class="scroll-to">Portfolio</a></li>
+                        <li class="nav-item"><a href="#team" class="scroll-to">Team</a></li>
+                        <li class="nav-item"><a href="#blog" class="scroll-to">Blog</a></li>
+                        <li class="nav-item"><a href="elements.html">Elements</a>
                             <ul class="sub-menu">
                                 <li><a href="http://www.spab-rice.com/themeforest/xone/demo/elements.html">General</a></li>
                                 <li><a href="http://www.spab-rice.com/themeforest/xone/demo/portfolio-layout.html">Portfolio Layout</a></li>
@@ -82,7 +82,7 @@
     <div class="page-body">
 
         <!-- HOME (SLIDER) -->
-        <section id="home" class="no-padding">
+        <section id="home" class="no-padding spy-item">
             <div class="section-inner">
 
                 <!-- REVOLUTION SLIDER -->
@@ -228,7 +228,7 @@
         <!-- HOME (SLIDER) -->
 
         <!-- ABOUT -->
-        <section id="about">
+        <section class="spy-item" id="about">
             <div class="section-inner">
 
                 <div class="wrapper">
@@ -296,7 +296,7 @@
         <!-- ABOUT -->
 
         <!-- SERVICE -->
-        <section id="service">
+        <section class="spy-item" id="service">
             <div class="section-inner">
                 <div class="wrapper">
 
@@ -400,7 +400,7 @@
         <!-- SERVICE -->
 
         <!-- PORTFOLIO -->
-        <section id="portfolio">
+        <section class="spy-item" id="portfolio">
             <div class="section-inner">
 
                 <div class="wrapper">
@@ -637,7 +637,7 @@
         <!-- PORTFOLIO -->
 
         <!-- TEAM -->
-        <section id="team">
+        <section class="spy-item" id="team">
             <div class="section-inner">
                 <div class="wrapper">
 
@@ -728,7 +728,7 @@
         <!-- TEAM -->
 
         <!-- BLOG -->
-        <section id="blog">
+        <section class="spy-item" id="blog">
             <div class="section-inner wrapper">
 
                 <div class="section-title">
@@ -810,7 +810,7 @@
         <div class="spacer spacer-big"></div>
 
         <!-- CONTACT -->
-        <section id="contact" class="no-padding">
+        <section class="spy-item" id="contact" class="no-padding">
             <div class="section-inner">
 
                 <!-- GOOGLE MAP -->
@@ -955,12 +955,25 @@
 <!-- JQuery plugins -->
 <script type='text/javascript' src='libs/jquery.easing/js/jquery.easing.min.js'></script>
 <script type='text/javascript' src='libs/jquery.easing/js/jquery.easing.compatibility.js'></script>
+<script type='text/javascript' src='build/js/jQuery.navActiveAnimate.js'></script>
 
 <!-- Main script -->
 <script type='text/javascript' src='build/js/main.js'></script>
 <script type='text/javascript' src='build/js/events.js'></script>
 
 <!-- SCRIPTS -->
+
+<!-- INITS -->
+<script type="text/javascript">
+    $(document).jqNavScrollSpy({
+        speed: 1500,
+        easing: 'easeInOutCirc',
+        navItems: '.nav-item',
+        scrollContainer: 'html,body',
+        spyItems: '.spy-item'
+    });
+</script>
+<!-- INITS -->
 
 <!-- ANALYTICS -->
 <script type="text/javascript">

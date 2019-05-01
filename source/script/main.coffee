@@ -1,3 +1,3 @@
 class Kernel
 	prop: ->
-		'Kernelasdasdasdas'
+		'Kernel'
