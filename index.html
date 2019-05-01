@@ -18,6 +18,7 @@
     <!-- FONTS -->
 
     <!-- CSS -->
+    <link rel='stylesheet' id='normalize-style-css'  href='libs/normalize.css/normalize.css' type='text/css' media='all' />
     <link rel='stylesheet' id='default-style-css'  href='build/css/main.css' type='text/css' media='all' />
     <!-- CSS -->
 
@@ -56,7 +57,13 @@
 
             <div class="menu right-float clearfix">
                 <nav id="main-nav">
-                    <ul style="position: fixed;top: 0;background: cadetblue;">
+                    <ul style="
+                                position: fixed;
+                                top: -14px;
+                                background: cadetblue;
+                                display: inline-flex;
+                                "
+                        class="nav-group">
                         <li class="nav-item"><a href="#home" class="scroll-to">Home</a></li>
                         <li class="nav-item"><a href="#about" class="scroll-to">About</a></li>
                         <li class="nav-item"><a href="#service" class="scroll-to">Service</a></li>
@@ -82,7 +89,7 @@
     <div class="page-body">
 
         <!-- HOME (SLIDER) -->
-        <section id="home" class="no-padding spy-item">
+        <section class="spy-item" id="home">
             <div class="section-inner">
 
                 <!-- REVOLUTION SLIDER -->
@@ -952,12 +959,12 @@
 
 <!-- SCRIPTS -->
 
-<!-- JQuery plugins -->
+    <!-- JQuery plugins -->
 <script type='text/javascript' src='libs/jquery.easing/js/jquery.easing.min.js'></script>
 <script type='text/javascript' src='libs/jquery.easing/js/jquery.easing.compatibility.js'></script>
 <script type='text/javascript' src='build/js/jQuery.navActiveAnimate.js'></script>
 
-<!-- Main script -->
+    <!-- Main script -->
 <script type='text/javascript' src='build/js/main.js'></script>
 <script type='text/javascript' src='build/js/events.js'></script>
 
@@ -968,8 +975,8 @@
     $(document).navActiveAnimate({
         speed: 1500,
         easing: 'easeInOutCirc',
-        navItems: '.nav-item',
         scrollContainer: 'html,body',
+        navItems: '.nav-item',
         spyItems: '.spy-item'
     });
 </script>
