@@ -1,10 +1,15 @@
 jQuery(window).on 'load', ( e ) ->
-	console.log 'load'
+	console.log e.type
 
 
-jQuery(window).on 'resize', ( e ) ->
-	console.log 'resize'
+jQuery(document).on 'resize', ( e ) ->
+	console.log e.type
 
 	
-jQuery(window).on 'scroll', ( e ) ->
-	console.log 'scroll'
+jQuery(document).on 'scroll', ( e ) ->
+	console.log $( e.target ).scrollTop()
+	
+
+	
+jQuery(document).on 'click', ( e ) ->
+	console.log e.type
