@@ -11,25 +11,25 @@
 		root.navScrollSpy = factory(root.jQuery)
 	return
 ) window, ($) ->
-	pluginName = 'jqNavScrollSpy'
+	pluginName = 'navActiveAnimate'
 	defaults =
 		navItems: '.nav-item'
 		scrollContainer: 'html,body'
 		spyItems: '.spy-item'
 		easing: 'swing'
 		speed: 550
-	jqNavScrollSpy = do ->
-		`var jqNavScrollSpy`
+	navActiveAnimate = do ->
+		`var navActiveAnimate`
 		#初始化
 		
-		jqNavScrollSpy = (element, configs) ->
+		navActiveAnimate = (element, configs) ->
 			@_element = element
 			@$win = $(window)
 			@defaults = $.extend({}, defaults, configs)
 			@init()
 			return
 		
-		jqNavScrollSpy::init = ->
+		navActiveAnimate::init = ->
 			@$navItems = $(@defaults.navItems)
 			@$spyItems = $(@defaults.spyItems)
 			@$scrollContainer = $(@defaults.scrollContainer)
@@ -42,20 +42,20 @@
 		
 		#监听滚动事件
 		
-		jqNavScrollSpy::spyScroll = ->
+		navActiveAnimate::spyScroll = ->
 			@$win.on 'scroll', @throttle(@scrollCallBack, 100, 200)
 			return
 		
 		#滚动监听的回调函数
 		
-		jqNavScrollSpy::scrollCallBack = ->
+		navActiveAnimate::scrollCallBack = ->
 			spyIndex = @getVisibleElIndex()
 			@changeNav @$navItems[spyIndex]
 			return
 		
 		#存储监视滚动元素的中心位置数组
 		
-		jqNavScrollSpy::getSpyItemsData = ->
+		navActiveAnimate::getSpyItemsData = ->
 			_this_1 = this
 			spyItemsData = []
 			@$spyItems.each (index) ->
@@ -65,7 +65,7 @@
 		
 		#获得当前滚动到视图区的元素的索引
 		
-		jqNavScrollSpy::getVisibleElIndex = ->
+		navActiveAnimate::getVisibleElIndex = ->
 			_this_1 = this
 			spyIndex = undefined
 			scrollTop = parseInt(@$win.scrollTop())
@@ -81,7 +81,7 @@
 		
 		#节流函数
 		
-		jqNavScrollSpy::throttle = (func, wait, mustRun) ->
+		navActiveAnimate::throttle = (func, wait, mustRun) ->
 			timeout = undefined
 			context = this
 			startTime = new Date
@@ -100,7 +100,7 @@
 		
 		#点击切换
 		
-		jqNavScrollSpy::clickSwitch = ->
+		navActiveAnimate::clickSwitch = ->
 			_this = this
 			@$navItems.on 'click', ->
 				_this.changeNav this
@@ -112,14 +112,14 @@
 		
 		#改变导航active
 		
-		jqNavScrollSpy::changeNav = (currentNav) ->
+		navActiveAnimate::changeNav = (currentNav) ->
 			@$navItems.removeClass 'active'
 			$(currentNav).addClass 'active'
 			return
 		
 		#滚动到可视区
 		
-		jqNavScrollSpy::scrollIntoView = (navIndex) ->
+		navActiveAnimate::scrollIntoView = (navIndex) ->
 			_this_1 = this
 			offsetTop = parseInt(@getOffsetTop(navIndex))
 #			if !@$scrollContainer.is(':animated')
@@ -131,18 +131,18 @@
 		
 		#获取滚动元素距离顶部的距离
 		
-		jqNavScrollSpy::getOffsetTop = (index) ->
+		navActiveAnimate::getOffsetTop = (index) ->
 			parseInt($(@$spyItems[index]).offset().top) - parseInt(@fixTop)
 		
-		jqNavScrollSpy
+		navActiveAnimate
 	
 	$.fn.navActiveAnimate = (configs) ->
 		@each ->
 			if !$.data(this, 'plugin_' + pluginName)
-				$.data this, 'plugin_' + pluginName, new jqNavScrollSpy(this, configs)
+				$.data this, 'plugin_' + pluginName, new navActiveAnimate(this, configs)
 			else
 				$.data this, 'plugin_' + pluginName, null
-				$.data this, 'plugin_' + pluginName, new jqNavScrollSpy(this, configs)
+				$.data this, 'plugin_' + pluginName, new navActiveAnimate(this, configs)
 			return
 	
 	return
