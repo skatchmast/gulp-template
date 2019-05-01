@@ -46,9 +46,9 @@ tasksList:
     - web
 
 taskListProd:
-    - clean
-    - script:dev
-    - style:dev
+#    - clean
+    - script:prod
+    - style:prod
     - watch
     - web
 

@@ -45,7 +45,7 @@ const
  * @test
  ************************************************************/
 gulp.task( 'test' ,( ) => {
-    return console.log(fs.existsSync('./build'))
+    return console.log('test')
 } );
 
 
@@ -168,3 +168,5 @@ gulp.task('web', ( ) => { web.init( conf.refresh ) });
  * @default task
  ************************************************************/
 gulp.task('default', gulp.parallel( conf.tasksList ) );
+
+gulp.task('prod', gulp.parallel( conf.taskListProd ) );
