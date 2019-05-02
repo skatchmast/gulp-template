@@ -72,11 +72,11 @@ gulp.task( 'script:dev' ,( ) => {
 
     return gulp.src( conf.script )
 
-        .pipe( plumber() )
         .pipe( coffee( { bare: true } ) )
         // .pipe( concat('app.js') )
         .pipe( babel( conf.presets ) )
         .pipe( prettify() )
+        .pipe( plumber() )
         .pipe( gulp.dest( conf.build.script ) )
         .pipe( web.stream() )
 
@@ -88,12 +88,12 @@ gulp.task( 'script:prod' ,( ) => {
 
     return gulp.src( conf.script )
 
-        .pipe( plumber() )
         .pipe( coffee( { bare: true } ) )
         // .pipe( concat('app.js') )
         .pipe( babel( conf.presets ) )
         .pipe( uglify() )
         .pipe( rename( conf.rename ) )
+        .pipe( plumber() )
         .pipe( gulp.dest( conf.build.script ) )
 
 //  End js prod task
@@ -110,10 +110,10 @@ gulp.task( 'style:dev' ,( ) => {
 
     return gulp.src( conf.style )
 
-        .pipe( plumber() )
         .pipe( sass() )
         .pipe( autoprefixer( conf.pref ) )
         .pipe( cssbeautify() )
+        .pipe( plumber() )
         .pipe( gulp.dest( conf.build.style ) )
         .pipe( web.stream() )
 
@@ -125,12 +125,12 @@ gulp.task( 'style:prod' ,( ) => {
 
     return gulp.src( conf.style )
 
-        .pipe( plumber() )
         .pipe( sass() )
         .pipe( autoprefixer( conf.pref ) )
         .pipe( cssnano( conf.compressed ) )
         .pipe( removeComments() )
         .pipe( rename( conf.rename ) )
+        .pipe( plumber() )
         .pipe( gulp.dest( conf.build.style ) )
         .pipe( web.stream() )
 

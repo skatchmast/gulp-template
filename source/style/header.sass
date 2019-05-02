@@ -1,0 +1,36 @@
+/** Header styles
+@import "mixins"
+header
+	@include centerAbsolute( 0 )
+	background: transparent
+	padding: 12px 0
+
+header.active
+	background: #95999c
+	position: fixed
+	#logo #default-logo img
+		width: 100px
+	
+
+/** top column header
+#logo
+	#default-logo
+		img
+			width: 150px
+			height: auto
+
+#top-menu
+	display: flex
+	align-items: center
+	justify-content: flex-end
+	ul.nav-group
+		display: flex
+		flex-direction: row
+		align-items: center
+		margin: 0
+		padding: 0
+		li.nav-item
+			padding: 0
+			margin: 0 0 0 32px
+			text-transform: uppercase
+			font-weight: 600
