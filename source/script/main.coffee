@@ -26,3 +26,12 @@ do($ = window.jQuery, window) ->
 				$this.data 'fullBackground', (data = new Plugin(this, option))
 			if typeof option == 'string'
 				data[option].apply(data, args)
+				
+isMobile = ( fn ) ->
+	if not /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini|Mozilla/i.test(navigator.userAgent)
+		fn
+	
+	
+	
+#$( '#full-background').owlCarousel();
+$('.owl-carousel').owlCarousel()

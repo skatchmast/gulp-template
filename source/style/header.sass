@@ -4,6 +4,7 @@ header
 	@include centerAbsolute( 0 )
 	background: transparent
 	padding: 12px 0
+	z-index: 10000
 
 header.active
 	background: #95999c
@@ -39,7 +40,11 @@ header.active
 
 
 #full-background
-	background: url("https://cdn.pixabay.com/photo/2018/02/27/09/19/colors-3185020_1280.jpg") no-repeat top center
-	background-size: cover
 	width: 100%
-	min-height: 100%
+	height: 100%
+	//overflow: hidden
+	.full-background-item
+		background: url("https://cdn.pixabay.com/photo/2018/02/27/09/19/colors-3185020_1280.jpg") no-repeat top center
+		background-size: cover
+		width: 100%
+		height: 100%

@@ -1,31 +1,33 @@
 ### var ###
-page = $('html,body')
+$page       = $('html,body')
+$height     = $(window).height()
 
 jQuery(window).on 'load', ( e ) ->
 	console.log e.type
-#	$( '#full-background').fullBackground('init')
+	$page.navActiveAnimate({
+		speed: 1500,
+		easing: 'easeInOutCirc',
+		scrollContainer: 'html,body',
+		navItems: '.nav-item',
+		spyItems: '.spy-item'
+	});
 	
-	page.navActiveAnimate({
-			speed: 1500,
-			easing: 'easeInOutCirc',
-			scrollContainer: 'html,body',
-			navItems: '.nav-item',
-			spyItems: '.spy-item'
-		});
+	$( '#full-background').fullBackground('init')
+
 
 
 
 
 jQuery(window).on 'resize', ( e ) ->
 	console.log e.type
-#	$( '#full-background').fullBackground('init')
-
+	if window.innerWidth > 1023
+		isMobile $( '#full-background').fullBackground('init')
 	
 
 
 jQuery(document).on 'scroll', ( e ) ->
 	console.log $( e.target ).scrollTop()
-	page.stop()
+	$page.stop()
 	
 
 	
