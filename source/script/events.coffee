@@ -60,7 +60,23 @@ $('.full-background-inner').on 'mousemove', ( e ) ->
 		$(e.target).parent().css
 			transform: "translate(#{ offs }px,0)"
 
+ui =true
+$('.full-background-inner').bind 'touchstart', (jQueryEvent) ->
+	ui =true
 
 
-#jQuery(document).on 'touchmove', ( e ) ->
-#	console.log e.type
+$('.full-background-inner').bind 'touchmove', (jQueryEvent) ->
+	jQueryEvent.preventDefault()
+	event = window.event
+	$(jQueryEvent.target).html 'x=' + event.touches[0].pageX + '  --- ' + $(jQueryEvent.target).parent().offset().left
+	
+#	ui =true
+	if  ui
+		x = event.touches[0].pageX
+		y = $(jQueryEvent.target).parent().offset().left
+		ui = false
+	
+	offs = event.touches[0].pageX - x + y
+	
+	$(jQueryEvent.target).parent().css
+		transform: "translate(#{ offs }px,0)"
