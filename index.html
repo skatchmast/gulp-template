@@ -85,10 +85,14 @@
 
     <!-- FULL BACKGROUND -->
     <div id="full-background">
-        <div class="full-background-item"></div>
-        <div class="full-background-item"></div>
-        <div class="full-background-item"></div>
-        <div class="full-background-item"></div>
+        <div class="full-background-inner">
+
+            <div class="full-background-item"></div>
+            <div class="full-background-item"></div>
+            <div class="full-background-item"></div>
+            <div class="full-background-item"></div>
+
+        </div>
     </div> <!-- END full-background -->
     <!-- FULL BACKGROUND -->
 
@@ -170,13 +174,12 @@
 
 <!-- INITS -->
 <script type="text/javascript">
-    $(document).navActiveAnimate({
-        speed: 1500,
-        easing: 'easeInOutCirc',
-        scrollContainer: 'html,body',
-        navItems: '.nav-item',
-        spyItems: '.spy-item'
-    });
+    /* Debug is mobile browser */
+    if(navigator.userAgent.match(/Android/i)){
+
+        $( '#full-background').height( jQuery( window ).height() )
+
+    }
 </script>
 <!-- INITS -->
 

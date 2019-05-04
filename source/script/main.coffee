@@ -14,7 +14,8 @@ do($ = window.jQuery, window) ->
 		# Additional plugin methods go here
 		init: ( ) ->
 			@$el.css
-				height: "#{$(@options.fullEl).height()}px"
+				minHeight: "#{$(@options.fullEl).innerHeight()}px"
+				minWidth: "#{$(@options.fullEl).innerWidth()}px"
 	
 	# Define the plugin
 	$.fn.extend fullBackground: (option, args...) ->
@@ -34,4 +35,4 @@ isMobile = ( fn ) ->
 	
 	
 #$( '#full-background').owlCarousel();
-$('.owl-carousel').owlCarousel()
+#$('.owl-carousel').owlCarousel()
