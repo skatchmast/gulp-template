@@ -12,8 +12,7 @@ jQuery(window).on 'load', ( e ) ->
 		spyItems: '.spy-item'
 	});
 	
-#	$( '#full-background').fullBackground('init')
-#	$( '.full-background-item').fullBackground('init')
+	$( '.full-background-inner').fullBackground()
 
 
 
@@ -28,7 +27,7 @@ jQuery(window).on 'resize', ( e ) ->
 
 
 jQuery(document).on 'scroll', ( e ) ->
-	console.log $( e.target ).scrollTop()
+#	console.log $( e.target ).scrollTop()
 	$page.stop()
 
 
@@ -39,44 +38,39 @@ jQuery(document).on 'click', ( e ) ->
 
 
 
-x = 0
-y = 0
-a = 0
-$('.full-background-inner').on 'mousedown', ( e ) ->
-	e.preventDefault()
-	
-	console.log e.type
-	x = e.clientX
-	y = $(e.target).parent().offset().left
+#x = 0
+#y = 0
+#slideStart = true
 
 
-
-$('.full-background-inner').on 'mousemove', ( e ) ->
-	e.preventDefault()
-	console.log $(e.target).parent().offset().left
-	offs = e.clientX - x + y
-	
-	if e.which == 1 and x > 0
-		$(e.target).parent().css
-			transform: "translate(#{ offs }px,0)"
-
-ui =true
-$('.full-background-inner').bind 'touchstart', (jQueryEvent) ->
-	ui =true
-
-
-$('.full-background-inner').bind 'touchmove', (jQueryEvent) ->
-	jQueryEvent.preventDefault()
-	event = window.event
-	$(jQueryEvent.target).html 'x=' + event.touches[0].pageX + '  --- ' + $(jQueryEvent.target).parent().offset().left
-	
-#	ui =true
-	if  ui
-		x = event.touches[0].pageX
-		y = $(jQueryEvent.target).parent().offset().left
-		ui = false
-	
-	offs = event.touches[0].pageX - x + y
-	
-	$(jQueryEvent.target).parent().css
-		transform: "translate(#{ offs }px,0)"
+#$('.full-background-inner').bind 'touchmove mousemove touchstart mousedown', ( jQueryEvent ) ->
+#	if jQueryEvent.type is 'mousedown'
+#		jQueryEvent.preventDefault()
+#
+#
+#	jQueryEvent.stopPropagation()
+#
+#	if jQueryEvent.type is 'touchstart' or jQueryEvent.type is 'mousedown'
+#		slideStart = true
+#
+#	event = window.event
+#
+#	cx =  jQueryEvent.clientX
+#
+#	if jQueryEvent.originalEvent.touches
+#		cx = jQueryEvent.originalEvent.touches[0].clientX
+#
+#	if  slideStart
+#		x = cx
+#		y = $(jQueryEvent.target).parent().offset().left
+#		slideStart = false
+#
+#	distance = cx  - x + y
+#
+#	touch = true
+#	if cx is jQueryEvent.clientX
+#		touch = jQueryEvent.which == 1 and x > 0
+#
+#	if touch
+#		$(jQueryEvent.target).parent().css
+#			transform: "translate(#{ distance }px,0)"
